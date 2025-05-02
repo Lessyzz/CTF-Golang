@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF - Image</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000;
+        }
+        .container {
+            text-align: center;
+        }
+        img {
+            width: 800px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+        .hidden-text {
+            font-size: 20px;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .flag-checker {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ff0000;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .flag-checker:hover {
+            background-color: #b30000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="hidden-text" id="hidden-text" style="color: #b60202; margin-bottom: 0px;">Saygı ve Özlemle...</div> <br><br>
+        <img src="/uploads/privateimage.jpg" alt="CTF Image" style="margin-top: 0px;"> <br>
+        <div class="hidden-text" id="hidden-text">The answer is hidden in the image!</div> <br>
+        <a href="/flag" class="flag-checker">Flag Checker</a>
+    </div>
+
+</body>
+</html>

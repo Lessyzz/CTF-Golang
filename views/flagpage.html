@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF - XOR</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow-y: hidden;
+            margin: 0;
+        }
+        h2, h3 {
+            color: darkred;
+            margin-bottom: 20px;
+        }
+        .container {
+            background: #1e1e1e;
+            padding: 30px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 69, 0, 0.5);
+            text-align: center;
+            margin-top: -50px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 93%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #2b2b2b;
+            color: #ffffff;
+            font-size: 16px;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(135deg, #6d1f00, #2b0b00);
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 69, 0, 0.7);
+        }
+        #outputText {
+            padding: 20px;
+            background-color: #2b2b2b;
+            border-radius: 5px;
+            word-wrap: break-word;
+            color: #ffffff;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 16px;
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 style="margin-top: 0px;">Flag Checker</h2>
+    <label for="flag">Flag:</label>
+    <input type="text" id="flag">
+    
+    <button onclick="flagCheck()">Check it!</button>
+    
+    <h3 style="margin-top: 50px; margin-bottom: 10px;">Result:</h3>
+    <p id="outputText" style="margin-top: 0px; margin-bottom: 0px;"></p>
+</div>
+
+<div class="footer"><b>Made by lessy' and DCYLDZ</b></div>
+
+<script>
+    async function flagCheck() {
+        const inputText = document.getElementById('flag').value;
+
+        try {
+            const response = await fetch('/flag', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ Flag: inputText })
+            });
+
+            const result = await response.text();
+
+            const output = document.getElementById('outputText');
+
+            const jsonResponse = JSON.parse(result);
+            const responseValue = jsonResponse.response;
+
+            if (responseValue === 'Correct!') {
+                output.style.color = '#00ff00';
+                output.textContent = 'Correct!';
+            } else {
+                output.style.color = 'red';
+                output.textContent = 'Wrong!';
+            }
+        } catch (error) {
+            console.error('Hata:', error);
+        }
+    }
+</script>
+
+</body>
+</html>
